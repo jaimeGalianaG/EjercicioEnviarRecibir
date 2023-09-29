@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         inicializarVista();
 
-        btnPalabras.setOnClickListener(new View.OnClickListener() {
+        /*btnPalabras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String frase = txtFrase.getText().toString();
@@ -51,9 +51,32 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "ESCRIBE ALGO!", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
     }
+    public void onClick(View boton){
+        String frase = txtFrase.getText().toString();
+        int contarPalabras = 0;
+        String concepto = "";
 
+        if (frase.length()>0){
+            if (boton.getId() == R.id.btnPalabrasMain){
+                contarPalabras = frase.split(" ").length;
+                concepto = "palabras";
+
+            }else{
+                if (boton.getId() == R.id.btnCaracteresMain){
+                    contarPalabras = frase.trim().length();
+                    concepto = "caracteres";
+                }
+            }
+
+            String mensaje = "El numero de "+concepto+" es "+contarPalabras;
+            crearNuevaActividad(mensaje);
+
+        }else {
+            Toast.makeText(MainActivity.this, "ESCRIBE ALGO!", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void crearNuevaActividad(String mensaje) {
         Intent intent = new Intent(MainActivity.this, MostrarResultadoActivity.class);
 
